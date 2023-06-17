@@ -1,27 +1,28 @@
 import express, { Router } from 'express';
 import { google } from 'googleapis';
-
+import dotenv from 'dotenv';
 
 const app = express();
 
 const router = express.Router();
 
+dotenv.config();
 
 //you have to get the credentials from google cloud platform and save it in credentials.json file
-const auth =new google.auth.GoogleAuth({
-    keyFile : "credentials.json",
-    scopes :"https://www.googleapis.com/auth/spreadsheets"
-  })
+// const auth =new google.auth.GoogleAuth({
+//     keyFile : "credentials.json",
+//     scopes :"https://www.googleapis.com/auth/spreadsheets"
+//   })
   
 
 //create client instance for auth 
 const client = await auth.getClient();
 
 //created instance of google sheets api
-const googlesheets = google.sheets({version : "v4" ,auth: client})
+const googlesheets = google.sheets({version : "v3" ,auth: client})
 
 //this value should be in environemnt variable
-const spreadsheetID = "11biOAcm6TvcT6ijwjr4g0GmR4UV2X4QRO2lkiKDG3mY"
+const spreadsheetID = process.env.SPREADSHEET_ID;
 
 
 
