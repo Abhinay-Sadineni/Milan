@@ -19,7 +19,7 @@ dotenv.config();
 const client = await auth.getClient();
 
 //created instance of google sheets api
-const googlesheets = google.sheets({version : "v3" ,auth: client})
+const googlesheets = google.sheets({version : "v3" ,auth: process.env.API_KEY});
 
 //this value should be in environemnt variable
 const spreadsheetID = process.env.SPREADSHEET_ID;
